@@ -1,9 +1,8 @@
 #include <SwitchControlLibrary.h>
 
-#define CLICK_DELAY 50
-#define SHORT_DELAY 250
-#define SEMI_SHORT_DELAY 300
-#define MIDDLE_DELAY 400
+#define CLICK_DELAY 60
+#define SHORT_DELAY 350
+#define MIDDLE_DELAY 500
 #define LONG_DELAY 1000
 #define LOOP_TIMES 300
 
@@ -46,42 +45,54 @@ void loop()
       delay(LONG_DELAY);
     }
     click_button(Button::R);
-    delay(2000);
+    delay(2500);
 
     // X→B→X→B→X→A + ボックスに入る
     click_button(Button::X);
-    delay(800);
+    delay(LONG_DELAY);
     click_button(Button::B);
-    delay(800);
+    delay(LONG_DELAY);
     click_button(Button::X);
-    delay(800);
+    delay(LONG_DELAY);
     click_button(Button::B);
-    delay(800);
+    delay(LONG_DELAY);
     click_button(Button::X);
-    delay(800);
+    delay(LONG_DELAY);
     click_button(Button::A);
-    delay(1800);
+    delay(2500);
     click_button(Button::R);
-    delay(2000);
+    delay(2500);
 
     //持ち物回収
-    for (int i = 0; i < 5; i++)
+    click_button(Button::X);
+    delay(SHORT_DELAY);
+
+    for (int j = 0; j < 5; j++)
     {
-      for (int i = 0; i < 6; i++)
+      for (int i = 0; i < 5; i++)
       {
-        mochimono();
-        click_hatbutton(HatButton::RIGHT);
+        mochimono_x();
+        if (j % 2 == 0)
+        {
+          click_hatbutton(HatButton::RIGHT);
+        }
+        else
+        {
+          click_hatbutton(HatButton::LEFT);
+        }
         delay(SHORT_DELAY);
       }
-      delay(MIDDLE_DELAY);
-      click_hatbutton(HatButton::RIGHT);
-      delay(MIDDLE_DELAY);
+      mochimono_x();
+      delay(SHORT_DELAY);
       click_hatbutton(HatButton::DOWN);
-      delay(MIDDLE_DELAY);
+      delay(SHORT_DELAY);
     }
+    click_button(Button::X);
+    delay(SHORT_DELAY);
+    click_button(Button::X);
+    delay(SHORT_DELAY);
 
     //後処理
-    delay(LONG_DELAY);
     for (int i = 0; i < 3; i++)
     {
       click_button(Button::B);
@@ -122,9 +133,23 @@ void click_hatbutton(uint8_t button)
 void mochimono()
 {
   click_button(Button::A);
-  delay(550);
+  delay(800);
   click_hatbutton(HatButton::DOWN);
   delay(SHORT_DELAY);
+  click_hatbutton(HatButton::DOWN);
+  delay(SHORT_DELAY);
+  click_button(Button::A);
+  delay(MIDDLE_DELAY);
+  click_button(Button::A);
+  delay(MIDDLE_DELAY);
+  click_button(Button::A);
+  delay(SHORT_DELAY);
+}
+
+void mochimono_x()
+{
+  click_button(Button::A);
+  delay(800);
   click_hatbutton(HatButton::DOWN);
   delay(SHORT_DELAY);
   click_button(Button::A);
